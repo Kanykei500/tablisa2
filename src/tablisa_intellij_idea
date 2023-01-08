@@ -1,0 +1,158 @@
+CREATE TABLE country
+(
+    id   SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL
+);
+INSERT INTO country(name)
+VALUES ('Kyrgyzstan'),
+       ('Korea'),
+       ('Germany'),
+       ('Italy');
+
+
+CREATE TABLE universityy
+(
+    id      SERIAL PRIMARY KEY,
+    name    VARCHAR(50) NOT NULL,
+    address INTEGER REFERENCES country (id)
+);
+INSERT INTO universityy(name, address)
+VALUES ('ADAM', 3),
+       ('BGU', 1),
+       ('KNU', 4),
+       ('KEU', 2);
+CREATE TABLE park
+(
+    id      SERIAL PRIMARY KEY,
+    name    VARCHAR(50) NOT NULL,
+    types   VARCHAR(50) NOT NULL,
+    area    VARCHAR(50) NOT NULL,
+    address INTEGER REFERENCES country (id)
+
+);
+INSERT INTO park(name, types, area, address)
+VALUES ('Yntymak', 'prirodnyi', '8 gektar', 1),
+       ('panfilov', 'nationalnyi', '3 gektar', 10),
+       ('Asanbai', 'zoologicheskyi', '1 gektar', 5),
+       ('Ata turk', 'lesopark', '10 gektar', 8),
+       ('Alleya', 'botanicheskyi', '2 gektar', 3);
+
+
+CREATE TABLE market
+(
+    id                 SERIAL PRIMARY KEY,
+    name               VARCHAR(30) NOT NULL,
+    year_of_foundation DATE,
+    quantity           INTEGER,
+    phone_number       VARCHAR(20) UNIQUE,
+    country_id         INTEGER REFERENCES country (id)
+);
+INSERT INTO market(name, year_of_foundation, quantity, phone_number, country_id)
+VALUES ('Globus', '2000-02-13', 10, '996702666357', 12),
+       ('Frunze', '1995-02-24', 5, '996234566784', 5),
+       ('Alma', '2020-02-09', 3, '996990128880', 9);
+CREATE TABLE school
+(
+    id                 SERIAL PRIMARY KEY,
+    learning_format    VARCHAR(20) NOT NULL,
+    name               VARCHAR     NOT NULL,
+    number_of_students INTEGER,
+    school_number      INTEGER UNIQUE,
+    address            INTEGER REFERENCES country (id)
+
+);
+INSERT INTO school(learning_format, name, number_of_students, school_number, address)
+VALUES ('online', 'NKG', 3000, 5, 19),
+       ('offline', 'gimnazya', 1500, 69, 2),
+       ('online', 'Manas', 2000, 1, 6);
+
+
+CREATE TABLE student
+(
+    id         SERIAL PRIMARY KEY,
+    first_name VARCHAR(50) NOT NULL,
+    last_name  VARCHAR(50) NOT NULL,
+    age        INTEGER,
+    email      VARCHAR(40) UNIQUE,
+    country    INTEGER REFERENCES country (id)
+);
+
+INSERT INTO student(first_name, last_name, age, email, country)
+VALUES ('Kanykei', 'Askarbekova', 19, 'kanykei@gmail.com', 17),
+       ('Eliza', 'Ahyralieva', 18, 'eliza@gmail.com', 21),
+       ('Aigerim', 'Bektenova', 17, 'a@gmail.com', 4),
+       ('Aiperi ', 'Toktosunova', 19, 'aiperi@gmail.com', 1),
+       ('Aisuluu', 'Aldanova', 20, 'aisuluu@gmail.com', 7);
+
+
+CREATE TABLE car
+(
+    id     SERIAL PRIMARY KEY,
+    model  VARCHAR(50) NOT NULL,
+    colour VARCHAR(30) NOT NULL,
+    number INTEGER UNIQUE
+);
+INSERT INTO car(model, colour, number)
+VALUES ('BMW', 'black', 2222),
+       ('Ford', 'red', 3333),
+       ('Honda', 'white', 8888),
+       ('Kia', 'green', 9999);
+
+CREATE TABLE driver
+(
+    id         SERIAL PRIMARY KEY,
+    first_name VARCHAR(50) NOT NULL,
+    last_name  VARCHAR(50) NOT NULL,
+    car        INTEGER REFERENCES car (id)
+);
+INSERT INTO driver(first_name, last_name, car)
+VALUES ('Islam', 'Toktosunov', 2),
+       ('Kanykei', 'Askarbekova', 4),
+       ('Tilek', 'Joomart uulu', 3);
+
+CREATE TABLE notebook
+(
+    id     SERIAL PRIMARY KEY,
+    model  VARCHAR(30) NOT NULL,
+    memory INTEGER
+
+);
+INSERT INTO notebook(model, memory)
+VALUES ('Hp', 8),
+       ('Asus ', 16),
+       ('Lenovo', 32);
+CREATE TABLE programmerr
+(
+    id       SERIAL PRIMARY KEY,
+    name     VARCHAR(50) NOT NULL,
+    notebook INTEGER REFERENCES notebook (id)
+
+);
+INSERT INTO programmer(name, notebook)
+VALUES ('Kanykei', 1),
+       ('Saltanat', 2),
+       ('Ainazik', 3);
+
+select *
+from country;
+select *
+from universityy;
+select *
+from park;
+select *
+from market;
+select *
+from school;
+select *
+from student;
+select *
+from car;
+select *
+from driver;
+select *
+from notebook;
+select *
+from programmer;
+
+
+

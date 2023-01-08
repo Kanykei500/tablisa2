@@ -1,0 +1,161 @@
+CREATE TABLE region
+(
+    id   SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL
+);
+
+select*
+from region;
+INSERT INTO region(name)
+VALUES ('Talas'),
+       ('Osh'),
+       ('Batken'),
+       ('Naryn '),
+       ('Issik Kul'),
+       ('Chui'),
+       ('Jalal Abad');
+
+
+CREATE TABLE libraryy
+(
+    id      SERIAL PRIMARY KEY,
+    name    VARCHAR(50) NOT NULL,
+    address INTEGER REFERENCES region (id)
+);
+
+select *
+from libraryy;
+
+INSERT INTO libraryy(name, address)
+VALUES ('Alykul Osmonov ', 1),
+       ('Bayalinov ', 5),
+       ('Razzakov', 7);
+
+CREATE TABLE cinema
+(
+    id      SERIAL PRIMARY KEY,
+    name    VARCHAR(50) NOT NULL,
+    movie   VARCHAR(30) NOT NULL,
+    address INTEGER REFERENCES region (id)
+);
+
+select *
+from cinema;
+INSERT INTO cinema (name, movie, address)
+VALUES ('Ala Too ', 'Avatar', 2),
+       ('Manas ', 'Buyursa', 3),
+       ('Rossia', 'Baykush', 4);
+
+CREATE TABLE job
+(
+    id   SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL
+);
+select *
+from job;
+
+INSERT INTO job(name)
+VALUES ('Teacher'),
+       ('Student'),
+       ('Driver');
+
+CREATE TABLE person
+(
+    id   SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    job  INTEGER REFERENCES job (id)
+);
+
+select *
+from person;
+
+INSERT INTO person(name, job)
+VALUES ('Kanykei', 3),
+       ('Aigerim', 2),
+       ('Ainazik', 1);
+
+
+CREATE TABLE istorical_places_of_the_regions
+(
+    id          SERIAL PRIMARY KEY,
+    peculiarity VARCHAR(50) NOT NULL,
+    region      INTEGER REFERENCES region (id)
+);
+
+select *
+from istorical_places_of_the_regions;
+
+
+INSERT INTO istorical_places_of_the_regions
+    (peculiarity, region)
+VALUES ('Manas Kumbozu', 1),
+       ('Suulaiman Too', 2),
+       ('Aigul gulu ', 3),
+       ('Tashrabat  ', 4),
+       ('Kol ', 5),
+       ('Burana ', 6),
+       (' Sary Chelek', 7);
+
+CREATE TABLE animal
+(
+    id   SERIAL PRIMARY KEY,
+    type VARCHAR(50) NOT NULL
+);
+select *
+from animal;
+
+INSERT INTO animal(type)
+VALUES ('Domashnyi'),
+       ('Dikyi'),
+       ('Fermernyi'),
+       ('Lesnoi');
+
+
+CREATE TABLE type_animals
+(
+    id   SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    type INTEGER REFERENCES animal (id)
+);
+
+select *
+from type_animals;
+
+INSERT INTO type_animals(name, type)
+VALUES ('Dog', 1),
+       ('Lion', 2),
+       ('Cow', 3),
+       ('Fox', 4);
+
+CREATE TABLE abilities_of_people
+(
+    id   SERIAL PRIMARY KEY,
+    able VARCHAR(50) NOT NULL
+);
+select *
+from abilities_of_people;
+
+INSERT INTO abilities_of_people(able)
+VALUES ('Cooking'),
+       ('Driving'),
+       ('Dancing'),
+       ('Teaching'),
+       ('Coding');
+
+CREATE TABLE jobs
+(
+    id   SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    able INTEGER REFERENCES abilities_of_people (id)
+);
+
+select *
+from jobs;
+
+INSERT INTO jobs(name, able)
+VALUES ('Programmer', 5),
+       ('Cook', 1),
+       ('Dancer', 3),
+       ('Teacher', 4),
+       ('Driver', 2);
+
