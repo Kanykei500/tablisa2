@@ -77,3 +77,166 @@ postgres=# select * from chef;
   1 | Eliza  | Son Kol
   2 | Nuriza | Aalam
 (2 rows)
+
+Server [localhost]:
+Database [postgres]:
+Port [5432]:
+Username [postgres]: postgres
+Password for user postgres:
+psql (15.1)
+WARNING: Console code page (866) differs from Windows code page (1251)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+postgres=# create table bag(id serial primary key,colour varchar(50));
+CREATE TABLE
+postgres=# insert into bag (colour )lvalues('red'),('green'),('blue'),('yellow');
+ОШИБКА:  ошибка синтаксиса (примерное положение: "lvalues")
+LINE 1: insert into bag (colour )lvalues('red'),('green'),('blue'),(...
+                                 ^
+postgres=# insert into bag (colour )values ('red'),('green'),('blue'),('yellow');
+INSERT 0 4
+postgres=# select *from bad;
+ОШИБКА:  отношение "bad" не существует
+LINE 1: select *from bad;
+                     ^
+postgres=# select * from bag;
+ id | colour
+----+--------
+  1 | red
+  2 | green
+  3 | blue
+  4 | yellow
+(4 rows)
+
+
+postgres=# create table studentss(id serial primary key,name varchar(50),bag integer references bag (id);
+postgres(# create table studentss(id serial primary key,name varchar(50),bag integer references bag (id));
+postgres(#
+postgres(#  create table studentss(id serial primary key,name varchar(50),bag integer references bag (id));
+postgres(#  create table studentss(id serial primary key,name varchar(50),bag integer references bag (id));
+postgres(#  create table studentss(id serial primary key,name varchar(50),bag integer references bag (id));
+postgres(#  create table studentss(id serial primary key,name varchar(50),bag integer references bag (id))));
+ОШИБКА:  ошибка синтаксиса (примерное положение: ";")
+LINE 1: ...rimary key,name varchar(50),bag integer references bag (id);
+                                                                      ^
+postgres=#  create table studentss(id serial primary key,name varchar(50),bag integer references bag (id));
+CREATE TABLE
+postgres=# insert into studentss (name,bag)values('Kanykei',4),('Eliza',1),('Jiydegul',3);
+INSERT 0 3
+postgres=# select * from studentss;
+ id |   name   | bag
+----+----------+-----
+  1 | Kanykei  |   4
+  2 | Eliza    |   1
+  3 | Jiydegul |   3
+(3 rows)
+
+
+postgres=# create table courses (id serial primary key,name varchar(50));
+CREATE TABLE
+postgres=# insert info courses (name)values ('JS'),('Java'),('Pyton');
+ОШИБКА:  ошибка синтаксиса (примерное положение: "info")
+LINE 1: insert info courses (name)values ('JS'),('Java'),('Pyton');
+               ^
+postgres=# insert into courses (name)values ('JS'),('Java'),('Pyton');
+INSERT 0 3
+postgres=# select * from courses;
+ id | name
+----+-------
+  1 | JS
+  2 | Java
+  3 | Pyton
+(3 rows)
+
+
+postgres=# create table days (id serial primary key,name varchar(40));
+CREATE TABLE
+postgres=# insert into days (name)values('Monday'),('Tuesday'),('Wednesday'),('Thursday'),('Friday'),('Saturday'),('Sunday');
+INSERT 0 7
+postgres=# select * from days;
+ id |   name
+----+-----------
+  1 | Monday
+  2 | Tuesday
+  3 | Wednesday
+  4 | Thursday
+  5 | Friday
+  6 | Saturday
+  7 | Sunday
+(7 rows)
+
+
+postgres=# create table weekend(id serial primary key,name varchar(50));
+CREATE TABLE
+postgres=# create table weekend(id serial primary key,name integer references days(id);
+postgres(# create table weekend(id serial primary key,name integer references days(id));
+postgres(#  create table weekend(id serial primary key,name integer references days(id));
+postgres(#  create table weekend(id serial primary key,name integer references days(id));
+postgres(#  create table weekend(id serial primary key,name integer references days(id)));
+ОШИБКА:  ошибка синтаксиса (примерное положение: ";")
+LINE 1: ...kend(id serial primary key,name integer references days(id);
+                                                                      ^
+postgres=# create table weekends \q
+Завершить выполнение пакетного файла [Y(да)/N(нет)]? нет
+Завершить выполнение пакетного файла [Y(да)/N(нет)]?v
+
+Server [localhost]:
+Database [postgres]:
+Port [5432]:
+Username [postgres]: postgres
+Password for user postgres:
+psql (15.1)
+WARNING: Console code page (866) differs from Windows code page (1251)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+postgres=# create table weekends(id serial primary key,name varchar(60));
+CREATE TABLE
+postgres=# create table weekends(id serial primary key, name integer references days (id));
+ОШИБКА:  отношение "weekends" уже существует
+postgres=# create table weekendsss (id serial primary key, name integer references days (id));
+CREATE TABLE
+postgres=# insert into weekendsss(name)values(6),(7);
+INSERT 0 2
+postgres=# select * from weekendsss;
+ id | name
+----+------
+  1 |    6
+  2 |    7
+(2 rows)
+
+
+
+postgres=# create table weekends(id serial primary key,name varchar(60));
+CREATE TABLE
+postgres=# create table weekends(id serial primary key, name integer references days (id));
+ОШИБКА:  отношение "weekends" уже существует
+postgres=# create table weekendsss (id serial primary key, name integer references days (id));
+CREATE TABLE
+postgres=# insert into weekendsss(name)values(6),(7);
+INSERT 0 2
+postgres=# select * from weekendsss;
+ id | name
+----+------
+  1 |    6
+  2 |    7
+(2 rows)
+
+
+postgres=# create table lessons(id serial primary key,name varchar(50),lessons_day integer references days(id));
+CREATE TABLE
+postgres=# insert into lessons (name,lessons_day)values('Technical',1),('Practice',2),('English',3),('Biology',4),('Russian',5);
+INSERT 0 5
+postgres=# select * from lessons;
+ id |   name    | lessons_day
+----+-----------+-------------
+  1 | Technical |           1
+  2 | Practice  |           2
+  3 | English   |           3
+  4 | Biology   |           4
+  5 | Russian   |           5
+(5 rows)
+
