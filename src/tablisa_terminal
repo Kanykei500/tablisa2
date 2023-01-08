@@ -1,0 +1,79 @@
+Server [localhost]:
+Database [postgres]:
+Port [5432]:
+Username [postgres]: postgres
+Password for user postgres:
+psql (15.1)
+WARNING: Console code page (866) differs from Windows code page (1251)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+postgres=# create table car(id serial primary key,number integer,model varchar);
+ОШИБКА:  отношение "car" уже существует
+postgres=# create table cars(id serial primary key,number integer,model varchar);
+CREATE TABLE
+postgres=# insert into cars (number,model) values(1111,'kia'),(2222,'bmw');
+INSERT 0 2
+postgres=# select *from car;
+ id | model | colour | number
+----+-------+--------+--------
+  1 | BMW   | black  |   2222
+  2 | Ford  | red    |   3333
+  3 | Honda | white  |   8888
+  4 | Kia   | green  |   9999
+(4 rows)
+
+Server [localhost]:
+Database [postgres]:
+Port [5432]:
+Username [postgres]: postgres
+Password for user postgres:
+psql (15.1)
+WARNING: Console code page (866) differs from Windows code page (1251)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+postgres=# create table flower(id serial primary key,name varchar(40), colour varchar (50));
+ОШИБКА:  отношение "flower" уже существует
+postgres=# create table flowers (id serial primary key,name varchar(40), colour varchar (50));
+CREATE TABLE
+postgres=# insert into flowers(name,colour) values ('rose','red'),('tulipa','pink');
+INSERT 0 2
+postgres=# select * from flowers;
+ id |  name  | colour
+----+--------+--------
+  1 | rose   | red
+  2 | tulipa | pink
+(2 rows)
+
+
+postgres=# create table pestoran(id serial primary key,name varchar(50),address varchar(50));
+CREATE TABLE
+postgres=# create table restoran (id serial primary key,name varchar(50),address varchar(50));
+CREATE TABLE
+postgres=# insert into restoran (name,address) values ('ak_saray','Bishkek'),('Bermet','Talas');
+INSERT 0 2
+postgres=# select * from restoran;
+ id |   name   | address
+----+----------+---------
+  1 | ak_saray | Bishkek
+  2 | Bermet   | Talas
+(2 rows)
+
+
+postgres=# create table chef (id serial primary key, name varchar, restoran varchar);
+CREATE TABLE
+postgres=# create table cheff (id serial primary key, name varchar, restoran integer references (id));
+ОШИБКА:  ошибка синтаксиса (примерное положение: "(")
+LINE 1: ...rimary key, name varchar, restoran integer references (id));
+                                                                 ^
+postgres=# insert into chef (name,restoran) values('Eliza','Son Kol'),('Nuriza','Aalam');
+INSERT 0 2
+postgres=# select * from chef;
+ id |  name  | restoran
+----+--------+----------
+  1 | Eliza  | Son Kol
+  2 | Nuriza | Aalam
+(2 rows)
