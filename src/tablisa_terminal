@@ -69,7 +69,7 @@ postgres=# create table cheff (id serial primary key, name varchar, restoran int
 ОШИБКА:  ошибка синтаксиса (примерное положение: "(")
 LINE 1: ...rimary key, name varchar, restoran integer references (id));
                                                                  ^
-postgres=# insert into chef (name,restoran) values('Eliza','Son Kol'),('Nuriza','Aalam');
+postgres=# insert into chef  (name,restoran) values('Eliza','Son Kol'),('Nuriza','Aalam');
 INSERT 0 2
 postgres=# select * from chef;
  id |  name  | restoran
